@@ -1,0 +1,211 @@
+COMANDOS BÁSICOS DE LINUX
+
+Comandos para deligar e reiniciar o Linux
+
+reboot = o linux será reiniciado no mesmo momento.
+shutdown -r now = o linux será reiniciado no mesmo momento.
+shutdown -r 3 = o linux será reiniciado em 3 minutos.
+shutdown -h now = o linux será desligado no mesmo momento.
+shutdown -h 2 = o linux será desligado em 2 minutos.
+
+Comandos para Manipulação de Diretórios
+
+LS
+ls -la = lista as permissões, data de modificação, donos, grupos, etc, e todos os arquivos
+(inclusive os ocultos).
+Ex.: ls -la /bin = listagem completa dos arquivos do diretório /bin, inclusive os ocultos.
+
+CD
+Entra em um diretório.
+cd teste = entra na pasta teste.
+cd / = retorna ao diretório raíz.
+cd - = retorna ao diretório acessado anteriormente.
+cd .. = retorna a pasta acima da presente.
+
+PWD
+pwd = mostra o caminho do diretório atual.
+
+MKDIR
+Cria um diretório.
+mkdir /tmp/teste = cria o diretório “teste” no diretório “tmp”.
+
+RMDIR
+Remove um diretório.
+rmdir /tmp/teste = remove o diretório vazio “teste”.
+OBS.: O diretório deve estar vazio para ser removido.
+
+Comandos para Manipulação de Arquivos
+
+CAT
+Mostra o conteúdo de um arquivo.
+cat nomes.txt = visualiza o conteúdo do arquivo “nomes.txt”.
+
+TAC
+Mostra o conteúdo de um arquivo, só que em ordem inversa.
+tac nomes.txt = visualiza o conteúdo do arquivo “nomes.txt”, só que em ordem inversa.
+
+RM
+Apaga arquivos. Também pode ser usado para apagar diretórios e subdiretórios vazios ou que
+contenham arquivos.
+rm -rf = remove arquivos em sub-diretórios e subdiretórios sem perguntar.
+Ex.: rm –rf /tmp/teste = remove todos os arquivos e sub-diretórios.
+CP
+Copia arquivos.
+Ex.: cp txt.txt txt1.txt = faz uma cópia do arquivo “txt.txt” para “txt1.txt”.
+
+Ex.: cp -R /home/renan/teste/* /home/renan/aula = copia todos os arquivos e sub-diretórios
+do diretório “teste” para o diretório “aula”.
+
+MV
+Move ou renomeia arquivos e diretórios.
+Ex.: mv txt.txt txt2.txt = renomeia o arquivo “txt.txt” para “txt2.txt”.
+Ex.: mv txt2.txt /home/renan/aula/t = move o arquivo “txt2.txt” para o diretório “t”.
+
+NANO
+Edita os textos dos arquivos.
+Ex.: nano senhas_fortes.odt
+Todas as combinações de teclas para Nano começam com a tecla CTRL. Para executar um
+comando você deve manter a tecla CTRL pressionada e clicar na segunda tecla para executar a
+ação. As combinações mais comuns para Nano são:
+CTRL-o – Salva o arquivo e continua trabalhando.
+CTRL-x - Sai do editor. Se você estiver no meio da edição de um arquivo, o processo de saída
+irá perguntar se você quer salvar seu trabalho.
+
+Permissões de acesso a arquivos e diretórios
+
+CHMOD MÉTODO NUMÉRICO OU OCTAL
+Altera a permissão de acesso a um arquivo ou diretório.
+Dono = proprietário do arquivo ou diretório.
+Grupo = permite que vários usuários diferentes dentro do determinado grupo tenham acesso
+ao arquivo ou diretório.
+Outros usuários = usuários que não são nem donos nem pertencem ao determinado grupo, ou
+seja, os demais usuários.
+r = permissão de leitura para arquivos. Permite listar o conteúdo do diretório (ls).
+w = permissão de gravação para arquivos. Permite a gravação de arquivos/diretórios dentro do
+diretório.
+
+x = permissão de execução para arquivos. Permite acessar o diretório (cd).
+
+-rwxr-xr-- 1 renan users 8192 nov 4 16:00 teste.txt
+Explicando da esquerda para a direita: -rwxr-xr-- : arquivo. Se for “d” será um diretório, se for um “l” será um link, se for um “-”
+será um arquivo. -rwxr-xr-- : o dono do arquivo(renan) tem permissão de leitura, gravação e execução.
+-rwxr-xr-- : o grupo de usuários(users) tem permissão de leitura e gravação.
+-rwxr-xr-- : os outros usuários tem permissão de leitura.
+
+TABELA DE PERMISSÕES
+PermissãoDecimalDecimal --- 0 Nenhuma permissão de acesso.
+--x 1 Permissão de execução.
+-w- 2 Permissão de gravação.
+-wx 3 Permissão de gravação e execução. (2+1)
+r-- 4 Permissão de leitura.
+r-x 5 Permissão de leitura e execução. (4+1)
+rw- 6 Permissão de leitura e gravação. (4+2)
+rwx 7 Permissão de leitura, gravação e execução. (4+2+1)
+
+Ex.: chmod 764 teste.txt = dono(7=rwx) permissão de leitura, gravação e execução,
+grupo(6=rw-) permissão de leitura e gravação e outros usuários(4) permissão de leitura.
+
+Lista as partições de todos os discos
+# fdisk -l
+
+Lista as partições somente do disco sda
+# fdisk -l /dev/sda
+
+Mostra o espaço livre/ocupado das partições montadas
+# df -h
+
+* Crie no virtualbox, 2 discos SATA de 3GB.
+Cria partições no disco sdc
+# cfdisk /dev/sdc
+
+Criação de Sistema de Arquivos
+
+Mostra os comandos iniciados com mk
+# mk [tab] [tab]
+
+Mostra os tipos de sistema de arquivos que são possíveis criar
+# mkfs [tab] [tab]
+
+Cria o sistema de arquivo ext4 na partição sdc1 (formatar partição)
+# mkfs.ext4 /dev/sdc1
+
+Cria o sistema de arquivo swap na partição sdc3
+# mkswap /dev/sdc3
+
+Checa e mantem a integridade dos sistemas de arquivo na partição sdc1
+# fsck /dev/sdc1
+
+Checa e mantem a integridade dos sistemas de arquivo na partição sda1
+# fsck /dev/sda1
+
+######Configuração das Interfaces de redes#####
+
+
+#nano /etc/network/interfaces     <----- edita o arquivo de rede
+
+
+
+auto lo
+iface lo inet loopback
+
+#---------------------->PLACA QUE RECEBERA INTERNET VIA DHCP
+
+
+auto enp0s3
+iface enp0s3 inet dhcp
+
+#---------------------->PLACA QUE DISTRIBUI IPS NA REDE INTERNA
+
+
+auto enp0s8
+iface enp0s8 inet static         
+address 192.168.1.1    -------------->SERVIDOR DEBIAN
+netmask 255.255.255.0
+network 192.168.1.1     ----------------------->REDE
+
+2º-Após setar as interfaces de rede ( placas), deverá instalar os serviço DHCP no servidor
+com comando abaixo:
+#apt-get update
+#apt-get install  isc-dhcp-server
+
+OBS: opcional
+
+
+3º- Informar qual placa de rede irá distribuir ip na rede(servidor dhcp)
+
+#nano /etc/default/isc-dhcp-server
+descomentar a linha interfaces se for necessário
+
+interfaces="enp0s3"           <------ OU "eth1"
+
+4º- Alterar o arquivo  de configuração do dhcp. Esse arquivo armazena as principais configurações do dhcp no servidor.
+
+#nano /etc/dhcp/dhcpd.conf
+
+Obs: Sempre que for sai do editor nano sair salvando Ctrl+O  p/salva e Ctrl+X para sair.
+
+*Agora configurando DHCP-server
+
+#######Dhcp-server######
+
+ddns-update-style none;
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+log-facility local7;
+option domain-name "seu_Servidor";
+
+# essa é a configuração que está alinhada com a placa de rede eth1 ou enp0s8
+
+subnet 192.168.1.0  netmask 255.255.255.0 {
+range 192.168.1.150 192.168.1.200;
+option domain-name-servers 8.8.8.8, 8.8.4.4;
+option routers 192.168.1.254;
+option broadcast-address 192.168.2.255;
+}
+
+
+5º- logo após a configuração salve e reinicie o serviço dhcp.
+
+systemctl restart isc-dhcp-server.service  <----- debian 11
+/etc/init.d/isc-dhcp-server restart  <----- debian 11
